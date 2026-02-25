@@ -6,13 +6,11 @@
 #!system=ios
 #!date=2026-02-24
 
-
 # ==============================
 # [General]
 # ==============================
 [General]
 force-http-engine-hosts = %APPEND% *.ott.cibntv.net, optimus-ads.amap.com, s3plus.meituan.net
-
 
 # ==============================
 # [Rule] DOMAIN/IP level blocking (no MITM needed)
@@ -134,11 +132,6 @@ DOMAIN,adm.alipay.com,REJECT
 DOMAIN,adsm.alipay.com,REJECT
 DOMAIN,authads.alipay.com,REJECT
 
-# --- Toutiao/Today Headlines ---
-DOMAIN,ad.toutiao.com,REJECT
-DOMAIN,dsp.toutiao.com,REJECT
-DOMAIN,i.snssdk.com,REJECT
-
 # --- Bilibili ---
 DOMAIN,api.biliapi.com,REJECT,pre-matching,extended-matching
 DOMAIN,app.biliapi.com,REJECT,pre-matching,extended-matching
@@ -238,6 +231,15 @@ DOMAIN-KEYWORD,pagead.googlevideo.com,REJECT
 ^https?:\/\/kad\.gotokeep\.com\/op-engine-webapp\/v\d\/ad - reject
 ^https?:\/\/api\.gotokeep\.com\/ads\/v\d\/ads\/preload - reject
 ^https?:\/\/api\.gotokeep\.com\/guide-webapp\/v\d\/popup\/getPopUp - reject
+^https?:\/\/api\.gotokeep\.com\/running\/v\d\/home\/dialog - reject
+^https?:\/\/api\.gotokeep\.com\/kprime\/v\d\/popups\/primeGuide - reject
+^https?:\/\/api\.gotokeep\.com\/cauchy\/growth\/init - reject
+^https?:\/\/api\.gotokeep\.com\/search\/v\d\/default\/keyword\/list - reject
+^https?:\/\/api\.gotokeep\.com\/search\/v\d\/hotword\/list - reject
+^https?:\/\/api\.gotokeep\.com\/search\/v\d\/hotHashtag\/list - reject
+^https?:\/\/api\.gotokeep\.com\/search\/v\d\/hotCourse\/list - reject
+^https?:\/\/api\.gotokeep\.com\/training\/box\/config - reject
+^https?:\/\/api\.gotokeep\.com\/anno\/v\d\/upgrade\/check - reject
 
 # --- NetEase ---
 ^https?:\/\/appconf\.mail\.163\.com\/mmad\/ - reject
@@ -475,6 +477,11 @@ NetEaseCloudMusic_home = type=http-response, pattern=^https?:\/\/(ipv4|interface
 
 # --- Quark ---
 夸克 = type=http-response, pattern=^https?:\/\/open-cms-api\.(uc|quark)\.cn\/open-cms, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/quark.js, requires-body=true, timeout=60
+
+# --- Keep ---
+Keep个人页 = type=http-response, pattern=^https?:\/\/api\.gotokeep\.com\/athena\/v\d\/people\/my$, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/keepStyle.js, requires-body=true, timeout=60
+Keep基础配置 = type=http-response, pattern=^https?:\/\/api\.gotokeep\.com\/config\/v\d\/basic, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/keepStyle.js, requires-body=true, timeout=60
+Keep课程Feed = type=http-response, pattern=^https?:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/course, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/keepStyle.js, requires-body=true, timeout=60
 
 # --- YouTube ---
 YouTube响应体 = type=http-response, pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch), script-path=https://raw.githubusercontent.com/Maasea/sgmodule/refs/heads/master/Script/Youtube/youtube.response.js, requires-body=true, binary-body-mode=true, timeout=60
